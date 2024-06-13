@@ -12,7 +12,7 @@ import {
 
 const DiagnosticsList = () => {
   return (
-    <Card x-chunk="dashboard-05-chunk-3">
+    <Card className="grid">
       <CardHeader className="px-7">
         <CardTitle>Diagnostics List</CardTitle>
         {/* <CardDescription>Overview of your subscriptions.</CardDescription> */}
