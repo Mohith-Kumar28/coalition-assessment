@@ -32,9 +32,12 @@ export default function lab_results({ selectedPatient }: LabResultProps) {
         <CardTitle className="flex justify-between">Lab Results</CardTitle>
       </CardHeader>
       <ScrollArea className="h-32">
-        <CardContent className="grid gap-8">
+        <CardContent className="grid ">
           {selectedPatient.lab_results.map((result, index) => (
-            <div key={index} className="flex items-center gap-4">
+            <div
+              key={index}
+              className="flex items-center gap-4 hover:bg-gray-100 p-3 "
+            >
               <div className="grid gap-1">
                 <p className="text-sm font-medium leading-none">{result}</p>
               </div>

@@ -9,40 +9,56 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Patient } from "@/types/Patient";
 
-const DiagnosticsList = () => {
+interface DiagnosticsListProps {
+  selectedPatient: Patient | null;
+}
+
+const DiagnosticsList: React.FC<DiagnosticsListProps> = ({
+  selectedPatient,
+}) => {
+  if (!selectedPatient || !selectedPatient.diagnostic_list.length) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Diagnostics List</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>No diagnostics available.</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card className="grid">
       <CardHeader className="px-7">
         <CardTitle>Diagnostics List</CardTitle>
-        {/* <CardDescription>Overview of your subscriptions.</CardDescription> */}
       </CardHeader>
       <CardContent>
         <Table>
-          <TableHeader className="bg-background rounded-full overflow-hidden">
-            <TableRow>
-              <TableHead className="hidden sm:table-cell">
-                Problem/Diagnosis
-              </TableHead>
+          <TableHeader>
+            <TableRow className="bg-background rounded-full overflow-hidden w-full">
+              {/* <div className="bg-background rounded-full overflow-hidden w-full flex flex-grow"> */}
+              <TableHead>Name</TableHead>
               <TableHead>Description</TableHead>
-              <TableHead className="hidden sm:table-cell">Status</TableHead>
+              <TableHead>Status</TableHead>
+              {/* </div> */}
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Liam Johnson</div>
-                {/* <div className="hidden text-sm text-muted-foreground md:inline">
-                  liam@example.com
-                </div> */}
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-            </TableRow>
+            {selectedPatient.diagnostic_list.map((diagnostic, index) => (
+              <TableRow key={index}>
+                <TableCell>{diagnostic.name}</TableCell>
+                <TableCell>{diagnostic.description}</TableCell>
+                <TableCell>
+                  <Badge className="text-xs bg-gray-50" variant="secondary">
+                    {diagnostic.status}
+                  </Badge>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </CardContent>

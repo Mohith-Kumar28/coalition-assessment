@@ -48,7 +48,7 @@ const Overview = () => {
       <ScrollArea className="lg:h-[80vh] grid lg:col-span-2">
         <Card className="grid rows-3 h-full items-start gap-4 md:gap-8 bg-background">
           <Metrics />
-          <DiagnosticsList />
+          <DiagnosticsList selectedPatient={selectedPatient} />
         </Card>
       </ScrollArea>
 
