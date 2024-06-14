@@ -10,7 +10,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  Colors,
 } from "chart.js";
 
 ChartJS.register(

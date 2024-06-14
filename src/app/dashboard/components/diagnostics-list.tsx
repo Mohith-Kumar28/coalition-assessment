@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import {
   Table,
@@ -36,6 +37,7 @@ const DiagnosticsList: React.FC<DiagnosticsListProps> = ({
       <CardHeader className="px-7">
         <CardTitle>Diagnostics List</CardTitle>
       </CardHeader>
+
       <CardContent>
         <Table>
           <TableHeader>
@@ -47,6 +49,7 @@ const DiagnosticsList: React.FC<DiagnosticsListProps> = ({
               {/* </div> */}
             </TableRow>
           </TableHeader>
+          {/* <ScrollArea className="h-32 "> */}
           <TableBody>
             {selectedPatient.diagnostic_list.map((diagnostic, index) => (
               <TableRow key={index}>
@@ -60,6 +63,7 @@ const DiagnosticsList: React.FC<DiagnosticsListProps> = ({
               </TableRow>
             ))}
           </TableBody>
+          {/* </ScrollArea> */}
         </Table>
       </CardContent>
     </Card>
