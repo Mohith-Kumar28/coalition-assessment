@@ -12,27 +12,27 @@ import { Calendar, Phone, Shield, User } from "lucide-react";
 
 const notifications = [
   {
-    icon: <Calendar />,
+    icon: <Calendar size={20} />,
     title: "August 23, 1996",
     description: "Date Of Birth",
   },
   {
-    icon: <User />,
+    icon: <User size={20} />,
     title: "Female",
     description: "Gender",
   },
   {
-    icon: <Phone />,
+    icon: <Phone size={20} />,
     title: "(415) 555-1234",
     description: "Contact Info.",
   },
   {
-    icon: <Phone />,
+    icon: <Phone size={20} />,
     title: "(415) 555-5678",
     description: "Emergency Contacts",
   },
   {
-    icon: <Shield />,
+    icon: <Shield size={20} />,
     title: "Sunrise Health Assurance",
     description: "Insurance Provider",
   },
@@ -51,11 +51,11 @@ export function Profile({ className, ...props }: CardProps) {
         <CardTitle className="text-center ">Jessica Taylor</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <div className="py-6 px-3">
+        <div className="pb-3 px-3">
           {notifications.map((notification, index) => (
             <div
               key={index}
-              className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+              className=" grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
             >
               {/* <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" /> */}
               <div className="rounded-full flex justify-center align-middle bg-background p-2 aspect-square size-10">
