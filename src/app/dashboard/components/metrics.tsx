@@ -9,12 +9,44 @@ import {
 } from "@/components/ui/card";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import LineChart from "./line-chart";
+import { Patient } from "@/types/Patient";
 
-type Props = {};
+interface Props {
+  selectedPatient: Patient | null;
+}
 
-const Metrics = (props: Props) => {
+const Metrics = ({ selectedPatient }: Props) => {
+  // Function to decide which arrow to show based on the level
+  const getArrowIcon = (level: string) => {
+    switch (level.toLowerCase()) {
+      case "higher than average":
+        return <GoTriangleUp className="text-lg" />;
+      case "lower than average":
+        return <GoTriangleDown className="text-lg" />;
+      default:
+        return null; // No arrow for 'normal'
+    }
+  };
+
+  // Extract the latest diagnosis history entry
+  const latestDiagnosis = selectedPatient?.diagnosis_history[0];
+
+  // Default values in case there's no diagnosis history
+  const systolicValue = latestDiagnosis?.blood_pressure?.systolic.value ?? "-";
+  const systolicLevel = latestDiagnosis?.blood_pressure?.systolic.levels ?? "";
+  const diastolicValue =
+    latestDiagnosis?.blood_pressure?.diastolic.value ?? "-";
+  const diastolicLevel =
+    latestDiagnosis?.blood_pressure?.diastolic.levels ?? "";
+  const heartRateValue = latestDiagnosis?.heart_rate?.value ?? "-";
+  const heartRateLevel = latestDiagnosis?.heart_rate?.levels ?? "";
+  const respiratoryRateValue = latestDiagnosis?.respiratory_rate?.value ?? "-";
+  const respiratoryRateLevel = latestDiagnosis?.respiratory_rate?.levels ?? "";
+  const temperatureValue = latestDiagnosis?.temperature?.value ?? "-";
+  const temperatureLevel = latestDiagnosis?.temperature?.levels ?? "";
+
   return (
-    <Card className=" ">
+    <Card className="">
       <CardHeader>
         <CardTitle>Diagnosis History</CardTitle>
       </CardHeader>
@@ -27,39 +59,39 @@ const Metrics = (props: Props) => {
             <CardContent>
               <div className="flex md:flex-row flex-col">
                 <div className="md:w-3/4 w-full">
-                  <LineChart />
+                  <LineChart />{" "}
+                  {/* Assuming this chart is generic and doesn't require dynamic data */}
                 </div>
-                <div className="divide-y-2  divide-zinc-300 -mt-16">
-                  <Card className="border-0 bg-transparent ">
-                    <CardHeader className="pb-2">
-                      <CardDescription className="flex gap-2 font-bold">
-                        <span className="size-3 rounded-full bg-fuchsia-500"></span>
-                        Systolic
-                      </CardDescription>
-                      <CardTitle className="text-xl">160</CardTitle>
-                    </CardHeader>
-
-                    <CardFooter>
-                      <div className="text-xs text-muted-foreground flex gap-1">
-                        <GoTriangleUp className="text-lg" />
-                        Higher than average
-                      </div>
-                    </CardFooter>
-                  </Card>
-
+                <div className="divide-y-2 divide-zinc-300 -mt-16">
                   <Card className="border-0 bg-transparent">
                     <CardHeader className="pb-2">
                       <CardDescription className="flex gap-2 font-bold">
-                        <span className="size-3 rounded-full bg-indigo-500"></span>
-                        Diastolic
+                        <span className="rounded-full bg-fuchsia-500"></span>
+                        Systolic
                       </CardDescription>
-                      <CardTitle className="text-xl">78</CardTitle>
+                      <CardTitle className="text-xl">{systolicValue}</CardTitle>
                     </CardHeader>
-
                     <CardFooter>
                       <div className="text-xs text-muted-foreground flex gap-1">
-                        <GoTriangleDown className="text-sm" />
-                        Lower than average
+                        {getArrowIcon(systolicLevel)}
+                        {systolicLevel}
+                      </div>
+                    </CardFooter>
+                  </Card>
+                  <Card className="border-0 bg-transparent">
+                    <CardHeader className="pb-2">
+                      <CardDescription className="flex gap-2 font-bold">
+                        <span className="rounded-full bg-indigo-500"></span>
+                        Diastolic
+                      </CardDescription>
+                      <CardTitle className="text-xl">
+                        {diastolicValue}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardFooter>
+                      <div className="text-xs text-muted-foreground flex gap-1">
+                        {getArrowIcon(diastolicLevel)}
+                        {diastolicLevel}
                       </div>
                     </CardFooter>
                   </Card>
@@ -75,16 +107,17 @@ const Metrics = (props: Props) => {
                   <AvatarImage src="/assets/metrics/HeartBPM.svg" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-
                 <CardDescription className="text-base">
                   Respiratory Rate
                 </CardDescription>
-                <CardTitle className="text-xl">60 bpm</CardTitle>
+                <CardTitle className="text-xl">
+                  {respiratoryRateValue} bpm
+                </CardTitle>
               </CardHeader>
-
               <CardFooter>
                 <div className="text-sm text-muted-foreground flex gap-1">
-                  Normal
+                  {getArrowIcon(respiratoryRateLevel)}
+                  {respiratoryRateLevel}
                 </div>
               </CardFooter>
             </Card>
@@ -94,16 +127,15 @@ const Metrics = (props: Props) => {
                   <AvatarImage src="/assets/metrics/Temperature.svg" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-
                 <CardDescription className="text-base">
                   Temperature
                 </CardDescription>
-                <CardTitle className="text-xl">98.6 F</CardTitle>
+                <CardTitle className="text-xl">{temperatureValue} F</CardTitle>
               </CardHeader>
-
               <CardFooter>
                 <div className="text-sm text-muted-foreground flex gap-1">
-                  Normal
+                  {getArrowIcon(temperatureLevel)}
+                  {temperatureLevel}
                 </div>
               </CardFooter>
             </Card>
@@ -113,17 +145,15 @@ const Metrics = (props: Props) => {
                   <AvatarImage src="/assets/metrics/Respiratory-Rate.svg" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-
                 <CardDescription className="text-base">
                   Heart Rate
                 </CardDescription>
-                <CardTitle className="text-xl">78 bpm</CardTitle>
+                <CardTitle className="text-xl">{heartRateValue} bpm</CardTitle>
               </CardHeader>
-
               <CardFooter>
                 <div className="text-sm text-muted-foreground flex gap-1">
-                  <GoTriangleDown className="text-lg" />
-                  Lower than average
+                  {getArrowIcon(heartRateLevel)}
+                  {heartRateLevel}
                 </div>
               </CardFooter>
             </Card>
