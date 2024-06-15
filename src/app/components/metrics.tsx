@@ -10,6 +10,7 @@ import {
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import LineChart from "./line-chart";
 import { Patient } from "@/types/Patient";
+import { Separator } from "@/components/ui/separator";
 
 interface Props {
   selectedPatient: Patient | null;
@@ -51,7 +52,7 @@ const Metrics = ({ selectedPatient }: Props) => {
         <CardTitle>Diagnosis History</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid auto-rows-max items-start gap-4 md:gap-4 lg:col-span-2">
+        <div className="grid auto-rows-max items-start gap-4 md:gap-4 lg:col-span-2 divide-y divide-gray-200">
           <Card className="bg-fuchsia-100">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg">Blood Pressure</CardTitle>
@@ -62,7 +63,7 @@ const Metrics = ({ selectedPatient }: Props) => {
                   <LineChart selectedPatient={selectedPatient} />{" "}
                   {/* Assuming this chart is generic and doesn't require dynamic data */}
                 </div>
-                <div className="divide-y-2 divide-zinc-300 -mt-16">
+                <div className=" -mt-16">
                   <Card className="border-0 bg-transparent">
                     <CardHeader className="pb-2">
                       <CardDescription className="flex gap-2 font-bold">
@@ -78,6 +79,7 @@ const Metrics = ({ selectedPatient }: Props) => {
                       </div>
                     </CardFooter>
                   </Card>
+                  {/* <Separator className="h-1" /> */}
                   <Card className="border-0 bg-transparent">
                     <CardHeader className="pb-2">
                       <CardDescription className="flex gap-2 font-bold">
