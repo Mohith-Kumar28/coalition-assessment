@@ -9,7 +9,7 @@ export function Providers({ children, ...props }: ThemeProviderProps) {
   return (
     <NextThemesProvider {...props}>
       <TooltipProvider delayDuration={0}>
-        <div className="">{children}</div>
+        <div className="overflow-hidden">{children}</div>
       </TooltipProvider>
     </NextThemesProvider>
   );

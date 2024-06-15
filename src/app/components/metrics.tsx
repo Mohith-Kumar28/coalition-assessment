@@ -59,14 +59,14 @@ const Metrics = ({ selectedPatient }: Props) => {
             <CardContent>
               <div className="flex md:flex-row flex-col">
                 <div className="md:w-3/4 w-full">
-                  <LineChart />{" "}
+                  <LineChart selectedPatient={selectedPatient} />{" "}
                   {/* Assuming this chart is generic and doesn't require dynamic data */}
                 </div>
                 <div className="divide-y-2 divide-zinc-300 -mt-16">
                   <Card className="border-0 bg-transparent">
                     <CardHeader className="pb-2">
                       <CardDescription className="flex gap-2 font-bold">
-                        <span className="rounded-full bg-fuchsia-500"></span>
+                        <span className="rounded-full size-3 mt-1 bg-fuchsia-500"></span>
                         Systolic
                       </CardDescription>
                       <CardTitle className="text-xl">{systolicValue}</CardTitle>
@@ -81,7 +81,7 @@ const Metrics = ({ selectedPatient }: Props) => {
                   <Card className="border-0 bg-transparent">
                     <CardHeader className="pb-2">
                       <CardDescription className="flex gap-2 font-bold">
-                        <span className="rounded-full bg-indigo-500"></span>
+                        <span className="rounded-full bg-indigo-500 size-3 mt-1"></span>
                         Diastolic
                       </CardDescription>
                       <CardTitle className="text-xl">

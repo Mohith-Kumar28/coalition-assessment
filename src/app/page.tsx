@@ -13,9 +13,12 @@ import { useEffect, useState } from "react";
 import { fetchPatientData } from "@/services/api";
 import { Patient } from "@/types/Patient";
 import DiagnosticsList from "./components/diagnostics-list";
+import { Skeleton } from "@/components/ui/skeleton";
+import BarLoader from "@/components/reusable-components/bar-loader";
 
 const Overview = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
+  const [loading, setLoading] = useState<Boolean>(true);
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
 
   useEffect(() => {
@@ -31,13 +34,23 @@ const Overview = () => {
       if (jessicaTaylor) {
         setSelectedPatient(jessicaTaylor);
       }
+      setLoading(false);
     };
 
     fetchData();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center  h-[82vh] items-center space-x-4">
+        loading ...
+        <BarLoader />
+      </div>
+    );
+  }
+
   return (
-    <main className="grid flex-1 items-start lg:h-screen overflow-hidden p-4 md:p-8 gap-4 sm:py-0 md:gap-8 lg:grid-cols-4">
+    <main className="grid flex-1 items-start  overflow-hidden p-4 md:p-8 gap-4 sm:py-0 md:gap-8 lg:grid-cols-5">
       <ScrollArea className="h-[80vh]">
         <PatientsList
           patients={patients}
@@ -46,7 +59,7 @@ const Overview = () => {
         />
       </ScrollArea>
 
-      <ScrollArea className="lg:h-[80vh] grid lg:col-span-2">
+      <ScrollArea className="lg:h-[80vh] grid lg:col-span-3">
         <Card className="grid rows-3 h-full items-start gap-4 md:gap-8 bg-background">
           <Metrics selectedPatient={selectedPatient} />
           <DiagnosticsList selectedPatient={selectedPatient} />

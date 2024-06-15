@@ -42,7 +42,9 @@ const PatientsList: React.FC<PatientsListProps> = ({
               <AvatarFallback>{patient.name[0]}</AvatarFallback>
             </Avatar>
             <div className="grid gap-1">
-              <p className="text-sm font-medium leading-none">{patient.name}</p>
+              <p className="text-sm font-medium leading-none truncate">
+                {patient.name}
+              </p>
               <p className="text-sm text-muted-foreground">{`${patient.gender}, ${patient.age}`}</p>
             </div>
             <div className="ml-auto font-medium">
